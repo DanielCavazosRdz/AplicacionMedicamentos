@@ -6,11 +6,33 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous">
+        
     </head>
     <body>
-        <div>TODO write content</div>
+        
+        <div class="container">
+            <div class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="heading"><h2>UGRNL</h2></div> 
+                    <div class="panel-body">
+                        <form action="Login" method="POST">
+                            <label for="user">Name:</label>
+                            <input type="text" class="form-control" id="user" name="user" required>
+                            <label for="pass">Password:</label>
+                            <input type="password" class="form-control" id="pass" name="pass" required>
+                            <br><br>
+                            <input type="submit" class="btn btn-info" value="Login">
+                        </form>
+                    </div>
+                </div>
+           </div>
+         </div>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>
