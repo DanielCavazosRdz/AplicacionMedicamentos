@@ -26,7 +26,7 @@ public class MysqlConn {
         try{  
             Class.forName("com.mysql.jdbc.Driver");  
             Connection con= (Connection) DriverManager.getConnection(  
-            "jdbc:mysql://localhost:3306/nombre","root","pass"); //change the name and pass of the connection
+            "jdbc:mysql://localhost:3306/medicamentos?zeroDateTimeBehaviour=convertToNull","root","517574sS.");
             st = con.createStatement();
     }   catch (ClassNotFoundException ex) {
             Logger.getLogger(MysqlConn.class.getName()).log(Level.SEVERE, null, ex);
