@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Models.proveedorOperaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +60,8 @@ public class ModifyProveedor extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setAttribute("ID", request.getParameter("ID"));
+        request.getRequestDispatcher("ModiCrearProveedor.jsp").forward(request, response);
     }
 
     /**
@@ -72,7 +75,11 @@ public class ModifyProveedor extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        proveedorOperaciones po = new proveedorOperaciones();
+        po.updateProveedor(Integer.parseInt(request.getParameter("id")), request.getParameter("nombre"), request.getParameter("direccion"));
+        session.setAttribute("proveedores", po.getProveedores());
+        request.getRequestDispatcher("CatalogoProveedor.jsp").forward(request, response);
     }
 
     /**

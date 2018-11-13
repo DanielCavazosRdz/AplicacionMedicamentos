@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Models.usuarioOperaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +60,8 @@ public class ModifyUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setAttribute("ID", request.getParameter("ID"));
+        request.getRequestDispatcher("ModiCrearUsuario.jsp").forward(request, response);
     }
 
     /**
@@ -72,7 +75,15 @@ public class ModifyUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        usuarioOperaciones uo = new usuarioOperaciones();
+        int rol = 0;
+        if(request.getParameter("roles").equals("1")){
+            rol = 1;
+        }
+        uo.updateUsuario(Integer.parseInt(request.getParameter("id")), request.getParameter("nombre"), request.getParameter("pass"), rol);
+        session.setAttribute("usuarios", uo.getUsuarios());
+        request.getRequestDispatcher("CatalogoUsuario.jsp").forward(request, response);
     }
 
     /**

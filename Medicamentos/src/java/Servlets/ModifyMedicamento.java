@@ -5,13 +5,17 @@
  */
 package Servlets;
 
+import Models.Medicamento;
+import Models.medicamentoOperaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +62,8 @@ public class ModifyMedicamento extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.setAttribute("ID", request.getParameter("ID"));
+        request.getRequestDispatcher("ModiCrearMedicamento.jsp").forward(request, response);
     }
 
     /**
@@ -72,7 +77,15 @@ public class ModifyMedicamento extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        float porcentaje = (Float.parseFloat(request.getParameter("costo"))) / 100;
+        float venta = (porcentaje * Float.parseFloat(request.getParameter("porcentajeGanancia"))) + Float.parseFloat(request.getParameter("costo"));
+        medicamentoOperaciones mo = new medicamentoOperaciones();
+        mo.updateMedicamento(Integer.parseInt(request.getParameter("id")), request.getParameter("nombre"),
+                Integer.parseInt(request.getParameter("proveedorId")), Float.parseFloat(request.getParameter("costo")),
+                venta, Integer.parseInt(request.getParameter("inventario")), Float.parseFloat(request.getParameter("porcentajeGanancia")));
+        session.setAttribute("medicamentos", mo.getMedicamentos());
+        request.getRequestDispatcher("CatalogoMedicamento.jsp").forward(request, response);
     }
 
     /**

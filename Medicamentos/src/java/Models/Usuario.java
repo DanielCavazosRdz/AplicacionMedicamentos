@@ -16,14 +16,9 @@ public class Usuario {
     private int rol;
     
     Usuario(){
-        id = 0;
-        nombre = "";
-        pass = "";
-        rol = 0;
     }
     
-    Usuario(int id, String nombre, String pass, int rol){
-        this.id = id;
+    Usuario(String nombre, String pass, int rol){
         this.nombre = nombre;
         this.pass = pass;
         this.rol = rol;

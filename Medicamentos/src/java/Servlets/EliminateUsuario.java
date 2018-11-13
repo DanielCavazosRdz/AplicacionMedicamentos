@@ -5,6 +5,7 @@
  */
 package Servlets;
 
+import Models.usuarioOperaciones;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -58,7 +60,11 @@ public class EliminateUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        usuarioOperaciones uo = new usuarioOperaciones();
+        uo.deleteUsuario(Integer.parseInt(request.getParameter("ID")));
+        session.setAttribute("usuarios", uo.getUsuarios());
+        request.getRequestDispatcher("CatalogoUsuario.jsp").forward(request, response);
     }
 
     /**

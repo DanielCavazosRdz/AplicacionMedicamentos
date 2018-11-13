@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -40,6 +41,7 @@ public class Logout extends HttpServlet {
             out.println("<title>Servlet Logout</title>");            
             out.println("</head>");
             out.println("<body>");
+            response.sendRedirect("Login.jsp");
             out.println("<h1>Servlet Logout at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
@@ -58,7 +60,14 @@ public class Logout extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.removeAttribute("nombre");
+        session.removeAttribute("rol");
+        session.removeAttribute("medicamentos");
+        session.removeAttribute("usuarios");
+        session.removeAttribute("proveedores");
+        session.invalidate();
+        response.sendRedirect("Login.jsp");
     }
 
     /**

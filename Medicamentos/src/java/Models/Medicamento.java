@@ -19,17 +19,9 @@ public class Medicamento {
     float porcentajeGanancia;
     
     Medicamento(){
-        id = 0;
-        nombre = "";
-        proveedorId = 0;
-        costo = 0;
-        venta = 0;
-        inventario = 0;
-        porcentajeGanancia = 0;
     }
     
-    Medicamento(int id, String nombre, int proveedorId, float costo, float venta, int inventario, float porcentajeGanancia){
-        this.id = id;
+    Medicamento(String nombre, int proveedorId, float costo, float venta, int inventario, float porcentajeGanancia){
         this.nombre = nombre;
         this.proveedorId = proveedorId;
         this.costo = costo;
